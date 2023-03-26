@@ -5,6 +5,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.opt.guicursor = ""
+vim.opt.mouse = "a"
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
