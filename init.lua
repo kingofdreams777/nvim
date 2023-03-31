@@ -57,9 +57,9 @@ require('lazy').setup({
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 
-      'hrsh7th/cmp-nvim-lsp', 
-      'L3MON4D3/LuaSnip', 
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-vsnip',
       'hrsh7th/cmp-path'
@@ -258,7 +258,7 @@ vim.keymap.set('n', '<leader>pd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'lua', 'python', 'rust',  'help', 'vim', 'toml' },
+  ensure_installed = { 'lua', 'python', 'rust',  'help', 'vim', 'toml', 'gitignore', 'vue', 'typescript'},
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -380,6 +380,8 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
+  tailwindcss = {},
+  volar = {},
   taplo = {},
   rust_analyzer = {
     settings = {
