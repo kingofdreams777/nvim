@@ -381,7 +381,16 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   tailwindcss = {},
-  volar = {},
+  volar = {
+    settings = {
+      filetypes = {
+        'typescript',
+        'javascript',
+        'vue',
+        'json',
+      },
+    },
+  },
   taplo = {},
   rust_analyzer = {
     settings = {
