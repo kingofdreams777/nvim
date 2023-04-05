@@ -2,6 +2,7 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+
 return {
 	{"windwp/nvim-autopairs",
 	config = function ()
@@ -33,6 +34,12 @@ return {
 				vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
 				end,
 			},
+			dap = {
+				adapter = require('rust-tools.dap').get_codelldb_adapter(
+						'/home/ross/extensions/vadimcn.vscode-lldb-1.9.0-universal/adapter/codelldb',
+						'/home/ross/extensions/vadimcn.vscode-lldb-1.9.0-universal/lldb/lib/liblldb.so'
+					)
+				}
 		})
 	end},
 }
