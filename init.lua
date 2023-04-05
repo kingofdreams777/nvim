@@ -393,31 +393,7 @@ local servers = {
     },
   },
   taplo = {},
-  rust_analyzer = {
-    settings = {
-      ['rust-analyzer'] = {
-        checkOnSave = {
-          command = "clippy",
-        },
-        imports = {
-          granularity = {
-            group = "module",
-          },
-          prefix = "self",
-        },
-        cargo = {
-          buildScripts = {
-            enable = true,
-          },
-        },
-        procMacro = {
-          enable = true
-        }
-      },
-    }
-  },
   -- tsserver = {},
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
