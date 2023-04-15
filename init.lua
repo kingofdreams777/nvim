@@ -38,6 +38,9 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- Rust Analyzer with Rust-Tools
+  'simrat39/rust-tools.nvim',
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -388,6 +391,11 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
+  emmet_ls = {
+    filetypes = {
+      'html',
+    },
+  },
   tailwindcss = {},
   volar = {
     settings = {
@@ -456,7 +464,7 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
+    ['<C-n>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -465,7 +473,7 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
+    ['<C-p>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -483,6 +491,15 @@ cmp.setup {
 
 vim.diagnostic.config({
   virtual_text = true
+})
+
+local rt = require('rust-tools')
+
+rt.setup({
+  server = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  },
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`

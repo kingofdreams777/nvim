@@ -4,6 +4,7 @@
 -- See the kickstart.nvim README for more information
 
 return {
+	{"github/copilot.vim"},
 	{"windwp/nvim-autopairs",
 	config = function ()
 		require("nvim-autopairs").setup {}
@@ -21,25 +22,5 @@ return {
 			vim.keymap.set("n", "<C-n>", function () ui.nav_file(3) end)
 			vim.keymap.set("n", "<C-s>", function () ui.nav_file(4) end)
 			vim.keymap.set("n", "<leader>clear", mark.clear_all)
-	end},
-	{"simrat39/rust-tools.nvim",
-	config = function()
-		local rt = require("rust-tools")
-		rt.setup({
-			server = {
-				on_attach = function (_, bufnr)
-				-- Hover actions
-				vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-				-- Code Action Groups
-				vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-				end,
-			},
-			dap = {
-				adapter = require('rust-tools.dap').get_codelldb_adapter(
-						'/home/ross/extensions/vadimcn.vscode-lldb-1.9.0-universal/adapter/codelldb',
-						'/home/ross/extensions/vadimcn.vscode-lldb-1.9.0-universal/lldb/lib/liblldb.so'
-					)
-				}
-		})
 	end},
 }
