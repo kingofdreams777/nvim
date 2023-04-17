@@ -6,6 +6,7 @@ vim.g.maplocalleader = ' '
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.opt.guicursor = ""
 vim.opt.mouse = "a"
+vim.opt.relativenumber = true
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -39,7 +40,11 @@ require('lazy').setup({
   'tpope/vim-sleuth',
 
   -- Rust Analyzer with Rust-Tools
-  'simrat39/rust-tools.nvim',
+  {'simrat39/rust-tools.nvim',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+    },
+  },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -493,6 +498,12 @@ vim.diagnostic.config({
   virtual_text = true
 })
 
+local lldb_extension_path = vim.env.HOME .. './vscode/extensions/vadimcn.vscode-lldb-1.9.0/'
+local codelldb_path = lldb_extension_path .. 'adapter/codelldb'
+-- Comment below line out if not on MacOS
+local liblldb_path = lldb_extension_path .. 'adapter/libcodelldb.dylib'
+--local liblldb_path = lldb_extension_path .. 'adapter/libcodelldb.dylib'
+
 local rt = require('rust-tools')
 
 rt.setup({
@@ -500,6 +511,12 @@ rt.setup({
     on_attach = on_attach,
     capabilities = capabilities,
   },
+  dap = {
+    adapter = require('rust-tools.dap').get_codelldb_adapter(
+      codelldb_path,
+      liblldb_path
+    ),
+  }
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`

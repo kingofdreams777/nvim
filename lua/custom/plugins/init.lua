@@ -5,6 +5,16 @@
 
 return {
 	{"github/copilot.vim"},
+	{"saecki/crates.nvim", ft = {"rust", "toml"},
+		config = function (_, opts)
+			local crates = require("crates")
+			crates.setup(opts)
+			crates.show()
+
+			vim.keymap.set("n", "<leader>rcu", crates.upgrade_all_crates, {desc = "Upgrade all crates"})
+
+		end,
+	},
 	{"windwp/nvim-autopairs",
 	config = function ()
 		require("nvim-autopairs").setup {}
