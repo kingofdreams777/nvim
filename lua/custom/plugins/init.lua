@@ -53,6 +53,7 @@ return {
 		config = function (_, opts)
 			require("nvim-tree").setup(opts)
 			vim.g.nvimtree_side = opts.view.side
+			vim.cmd.hi("NvimTreeNormal", "guibg=NONE")
 		end,
 	},
 	{
