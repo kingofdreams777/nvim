@@ -1,9 +1,13 @@
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.opt.termguicolors = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", "<cmd> NvimTreeFocus <CR>")
+vim.keymap.set("n", "<leader>pt", "<cmd> NvimTreeToggle <CR>")
 vim.opt.guicursor = ""
 vim.opt.mouse = "a"
 vim.opt.relativenumber = true
@@ -40,10 +44,9 @@ require('lazy').setup({
   'tpope/vim-sleuth',
 
   -- Rust Analyzer with Rust-Tools
-  {'simrat39/rust-tools.nvim',
-    dependencies = {
-      'neovim/nvim-lspconfig',
-    },
+  {
+    'simrat39/rust-tools.nvim',
+    dependencies = "neovim/nvim-lspconfig",
   },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
@@ -99,6 +102,10 @@ require('lazy').setup({
     'Mofiqul/dracula.nvim',
     priority = 1000,
     config = function()
+      local dracula = require "dracula"
+      dracula.setup({
+        transparent_bg = false,
+      })
       vim.cmd.colorscheme 'dracula'
     end,
   },
@@ -110,7 +117,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'dracula',
+        theme = 'dracula-nvim',
         component_separators = '|',
         section_separators = '',
       },
@@ -412,7 +419,7 @@ local servers = {
       },
     },
   },
-  taplo = {},
+  taplo = {'toml'},
   -- tsserver = {},
   lua_ls = {
     Lua = {
@@ -491,6 +498,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = "crates"}
   },
 }
 
@@ -507,9 +515,11 @@ local liblldb_path = lldb_extension_path .. 'adapter/libcodelldb.dylib'
 local rt = require('rust-tools')
 
 rt.setup({
+  reload_workspace_from_cargo_toml = true,
   server = {
     on_attach = on_attach,
     capabilities = capabilities,
+    standalone = false,
   },
   dap = {
     adapter = require('rust-tools.dap').get_codelldb_adapter(
