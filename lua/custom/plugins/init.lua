@@ -25,10 +25,11 @@ return {
 		end
 	},
 	{"nvim-tree/nvim-tree.lua",
+		dependencies = {"nvim-tree/nvim-web-devicons"},
 		cmd = {"NvimTreeToggle", "NvimTreeFocus"},
 		opts = {
 			filters = {
-				dotfiles = true,
+				dotfiles = false,
 			},
 			disable_netrw = true,
 			hijack_netrw = true,

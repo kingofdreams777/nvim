@@ -528,6 +528,14 @@ rt.setup({
     ),
   }
 })
+require('lspconfig').volar.setup({
+  filetypes = {
+    'typescript',
+    'javascript',
+    'vue',
+    'json',
+  },
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
