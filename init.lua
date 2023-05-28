@@ -11,6 +11,9 @@ vim.keymap.set("n", "<leader>pt", "<cmd> NvimTreeToggle <CR>")
 vim.opt.guicursor = ""
 vim.opt.mouse = "a"
 vim.opt.relativenumber = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -39,9 +42,6 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
 
   -- Rust Analyzer with Rust-Tools
   {
@@ -168,7 +168,7 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  --require 'kickstart.plugins.autoformat',
+  require 'kickstart.plugins.autoformat',
   --require 'kickstart.plugins.debug',
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -419,7 +419,7 @@ local servers = {
       },
     },
   },
-  taplo = {'toml'},
+  taplo = { 'toml' },
   -- tsserver = {},
   lua_ls = {
     Lua = {
@@ -498,7 +498,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = "crates"}
+    { name = "crates" }
   },
 }
 
