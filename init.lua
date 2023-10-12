@@ -400,7 +400,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
+  clangd = {},
   -- gopls = {},
   -- pyright = {},
   emmet_ls = {
@@ -421,6 +421,11 @@ local servers = {
   },
   taplo = { 'toml' },
   -- tsserver = {},
+  eslint = {
+    filetypes = {
+      'javascript',
+    },
+  },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -528,6 +533,7 @@ rt.setup({
     ),
   }
 })
+
 require('lspconfig').volar.setup({
   filetypes = {
     'typescript',
