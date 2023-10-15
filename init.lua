@@ -142,15 +142,7 @@ require('lazy').setup({
     version = '*',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-lua/popup.nvim',
-      'nvim-telescope/telescope-media-files.nvim'
     },
-    extensions = {
-      media_files = {
-        filetypes = { 'png', 'jpg', 'jpeg', 'webp', 'pdf' },
-        find_cmd = 'rg',
-      }
-    }
   },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
